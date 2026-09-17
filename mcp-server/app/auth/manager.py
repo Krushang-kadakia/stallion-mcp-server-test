@@ -1,4 +1,6 @@
+from typing import Optional, Dict, Any
 from app.auth.store import BaseSessionStore, InMemorySessionStore, default_session_store
+
 from app.auth.session import UserSession
 from app.client.backend_client import BackendClient
 from app.utils.errors import AuthenticationRequiredError, ProjectContextRequiredError
