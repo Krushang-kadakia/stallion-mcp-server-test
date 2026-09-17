@@ -112,11 +112,30 @@ async def test_tool_invocations():
     perm_res = await permission_tools.get_project_permissions_tool("194", "test_tool_session")
     assert perm_res["success"] is True
 
-    # 11. view_permission_document (Token 2)
+    # 11. view_permission_document (Token 2 - JSON with relative URL)
     respx.get("https://api.dev.batman.co.in/permissions/projects/194/1038/documents/946/view").mock(
-        return_value=Response(200, json={"success": True, "data": {"file_id": "946", "view_url": "/permissions/..."}})
+        return_value=Response(200, json={"success": True, "data": {"file_id": "946", "view_url": "/permissions/projects/194/1038/documents/946/view"}})
     )
     doc_res = await permission_tools.view_permission_document_tool("194", "1038", "946", "test_tool_session")
     assert doc_res["success"] is True
+    assert doc_res["data"]["view_url"].startswith("https://api.dev.batman.co.in")
+
+    # 12. view_permission_document (Token 2 - Raw binary stream e.g. DWG or PDF)
+    respx.get("https://api.dev.batman.co.in/permissions/projects/194/1038/documents/947/view").mock(
+        return_value=Response(
+            200,
+            content=b"dummy binary dwg content",
+            headers={
+                "content-type": "image/vnd.dwg",
+                "content-disposition": 'attachment; filename="structure_drawing.dwg"'
+            }
+        )
+    )
+    binary_res = await permission_tools.view_permission_document_tool("194", "1038", "947", "test_tool_session")
+    assert binary_res["success"] is True
+    assert binary_res["is_binary"] is True
+    assert binary_res["file_format"] == "dwg"
+    assert binary_res["filename"] == "structure_drawing.dwg"
+    assert "https://api.dev.batman.co.in" in binary_res["view_url"]
 
     await client.close()

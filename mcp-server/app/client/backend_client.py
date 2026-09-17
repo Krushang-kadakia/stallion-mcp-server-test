@@ -85,8 +85,39 @@ class BackendClient:
                 details=str(error_details) if error_details else None
             )
 
+        content_type = response.headers.get("content-type", "").lower()
+        if "application/json" in content_type:
+            try:
+                return response.json()
+            except Exception as exc:
+                logger.error(f"Failed to parse JSON response from {clean_path}: {exc}")
+                raise BackendAPIError(status_code=500, message="Invalid JSON response from backend API")
+
+        # Fallback: try parsing JSON in case content-type header was omitted
         try:
             return response.json()
-        except Exception as exc:
-            logger.error(f"Failed to parse JSON response from {clean_path}: {exc}")
-            raise BackendAPIError(status_code=500, message="Invalid JSON response from backend API")
+        except Exception:
+            pass
+
+        # Handle raw binary or non-JSON content (e.g. PDF, DWG, octet-stream, images)
+        content_disposition = response.headers.get("content-disposition", "")
+        filename = None
+        if "filename=" in content_disposition:
+            filename = content_disposition.split("filename=")[-1].strip('";\' ')
+
+        file_format = (
+            "pdf" if "pdf" in content_type or (filename and filename.lower().endswith(".pdf"))
+            else "dwg" if "dwg" in content_type or "acad" in content_type or (filename and filename.lower().endswith(".dwg"))
+            else "binary"
+        )
+
+        return {
+            "success": True,
+            "is_binary": True,
+            "file_format": file_format,
+            "content_type": content_type or "application/octet-stream",
+            "filename": filename,
+            "file_size_bytes": len(response.content),
+            "view_url": f"{self.base_url}{clean_path}",
+            "message": f"Successfully retrieved {file_format.upper()} document ({len(response.content)} bytes). Access the full document via view_url."
+        }
