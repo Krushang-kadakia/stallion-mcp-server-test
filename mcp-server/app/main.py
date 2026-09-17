@@ -107,10 +107,43 @@ mcp.tool(
 )(view_permission_document_tool)
 
 
+import re
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
 
-# Create Starlette ASGI application with CORS enabled for remote clients & web inspectors
+
+class AbsoluteSSEEndpointMiddleware:
+    """
+    ASGI middleware ensuring SSE endpoint event contains the absolute public HTTPS URL.
+    This enables remote web clients (MCP Inspector web UI, Claude, ChatGPT) to POST messages correctly.
+    """
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        headers = dict(scope.get("headers", []))
+        proto = headers.get(b"x-forwarded-proto", b"http").decode()
+        host = headers.get(b"x-forwarded-host", headers.get(b"host", b"localhost:8000")).decode()
+        base_url = f"{proto}://{host}"
+
+        async def send_wrapper(message):
+            if message.get("type") == "http.response.body":
+                body = message.get("body", b"")
+                if b"event: endpoint" in body:
+                    text = body.decode("utf-8", errors="ignore")
+                    text = re.sub(r"data: /", f"data: {base_url}/", text)
+                    message = dict(message)
+                    message["body"] = text.encode("utf-8")
+            await send(message)
+
+        await self.app(scope, receive, send_wrapper)
+
+
+# Create Starlette ASGI application with CORS and Absolute SSE Endpoint Middleware
 app = mcp.sse_app()
 app.add_middleware(
     CORSMiddleware,
@@ -119,9 +152,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(AbsoluteSSEEndpointMiddleware)
 
 if __name__ == "__main__":
     logger.info(f"Starting Stallion MCP Server on {settings.host}:{settings.port} (SSE Transport with CORS)")
-    uvicorn.run(app, host=settings.host, port=settings.port)
+    uvicorn.run(app, host=settings.host, port=settings.port, proxy_headers=True, forwarded_allow_ips="*")
+
 
 
