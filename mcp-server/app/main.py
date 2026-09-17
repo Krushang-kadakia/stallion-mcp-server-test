@@ -95,7 +95,21 @@ mcp.tool(
 )(view_permission_document_tool)
 
 
+from starlette.middleware.cors import CORSMiddleware
+import uvicorn
+
+# Create Starlette ASGI application with CORS enabled for remote clients & web inspectors
+app = mcp.sse_app()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 if __name__ == "__main__":
-    logger.info(f"Starting Stallion MCP Server on {settings.host}:{settings.port} (SSE Transport)")
-    mcp.run(transport="sse")
+    logger.info(f"Starting Stallion MCP Server on {settings.host}:{settings.port} (SSE Transport with CORS)")
+    uvicorn.run(app, host=settings.host, port=settings.port)
+
 
