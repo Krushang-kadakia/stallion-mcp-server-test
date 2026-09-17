@@ -26,6 +26,10 @@ mcp = FastMCP(
     port=settings.port,
 )
 
+# Disable local-only DNS rebinding restrictions so remote deployment hosts (Render, Cloudflare, Clients) can connect
+mcp.settings.transport_security.enable_dns_rebinding_protection = False
+
+
 # --- Register Auth Tools ---
 mcp.tool(
     name="send_otp",
