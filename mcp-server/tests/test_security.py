@@ -49,3 +49,34 @@ async def test_token_sanitization_in_verify_otp():
     assert session.auth_token == raw_jwt
 
     await client.close()
+
+
+@pytest.mark.asyncio
+async def test_absolute_sse_endpoint_middleware():
+    from app.main import AbsoluteSSEEndpointMiddleware
+
+    async def fake_app(scope, receive, send):
+        await send({"type": "http.response.start", "status": 200, "headers": [(b"content-type", b"text/event-stream")]})
+        await send({"type": "http.response.body", "body": b"event: endpoint\r\n", "more_body": True})
+        await send({"type": "http.response.body", "body": b"data: /messages/?session_id=test_123\r\n\r\n", "more_body": False})
+
+    mw = AbsoluteSSEEndpointMiddleware(fake_app)
+    received = []
+
+    async def dummy_send(msg):
+        received.append(msg)
+
+    scope = {
+        "type": "http",
+        "headers": [
+            (b"host", b"stallion-mcp-server-test.onrender.com"),
+            (b"x-forwarded-proto", b"https")
+        ]
+    }
+    await mw(scope, None, dummy_send)
+
+    body_chunks = [r["body"].decode("utf-8") for r in received if r.get("type") == "http.response.body"]
+    assert len(body_chunks) == 2
+    assert "event: endpoint" in body_chunks[0]
+    assert "data: https://stallion-mcp-server-test.onrender.com/messages/?session_id=test_123" in body_chunks[1]
+

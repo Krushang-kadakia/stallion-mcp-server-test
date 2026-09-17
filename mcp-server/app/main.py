@@ -125,17 +125,25 @@ class AbsoluteSSEEndpointMiddleware:
             await self.app(scope, receive, send)
             return
 
-        headers = dict(scope.get("headers", []))
-        proto = headers.get(b"x-forwarded-proto", b"http").decode()
-        host = headers.get(b"x-forwarded-host", headers.get(b"host", b"localhost:8000")).decode()
+        headers = {}
+        for k, v in scope.get("headers", []):
+            headers[k.lower().decode("latin1")] = v.decode("latin1")
+
+        proto = headers.get("x-forwarded-proto", "http").split(",")[0].strip()
+        host = headers.get("x-forwarded-host", headers.get("host", "localhost:8000")).split(",")[0].strip()
+
+        # Enforce https for remote cloud deployments (e.g. Render)
+        if host.endswith(".onrender.com") or headers.get("x-forwarded-ssl") == "on":
+            proto = "https"
+
         base_url = f"{proto}://{host}"
 
         async def send_wrapper(message):
             if message.get("type") == "http.response.body":
                 body = message.get("body", b"")
-                if b"event: endpoint" in body:
+                if b"data: /" in body:
                     text = body.decode("utf-8", errors="ignore")
-                    text = re.sub(r"data: /", f"data: {base_url}/", text)
+                    text = re.sub(r"data: /(?!/)", f"data: {base_url}/", text)
                     message = dict(message)
                     message["body"] = text.encode("utf-8")
             await send(message)
