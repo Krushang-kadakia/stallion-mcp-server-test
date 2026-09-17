@@ -27,7 +27,15 @@ mcp = FastMCP(
 )
 
 # Disable local-only DNS rebinding restrictions so remote deployment hosts (Render, Cloudflare, Clients) can connect
-mcp.settings.transport_security.enable_dns_rebinding_protection = False
+if hasattr(mcp.settings, "transport_security") and mcp.settings.transport_security is not None:
+    mcp.settings.transport_security.enable_dns_rebinding_protection = False
+else:
+    try:
+        from mcp.server.transport_security import TransportSecuritySettings
+        mcp.settings.transport_security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
+    except Exception:
+        pass
+
 
 
 # --- Register Auth Tools ---
