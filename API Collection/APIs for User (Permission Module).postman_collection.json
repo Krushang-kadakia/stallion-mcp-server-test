@@ -1,0 +1,358 @@
+{
+  "info": {
+    "_postman_id": "2fbdd3cf-d060-4314-9539-82be6af43cf3",
+    "name": "APIs for User (Permission Module)",
+    "description": "These APIs are project specific",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58285933",
+    "_collection_link": "https://go.postman.co/collection/58285933-2fbdd3cf-d060-4314-9539-82be6af43cf3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1 Get All Permissions for a Project",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/permissions/projects/:projectId",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "permissions",
+            "projects",
+            ":projectId"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "194"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "1 Get All Permissions for a Project",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/permissions/projects/:projectId",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "permissions",
+                "projects",
+                ":projectId"
+              ],
+              "variable": [
+                {
+                  "key": "projectId",
+                  "value": "194"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:56:17 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "6217"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1849-EKZ6mqRxmztoe6WoPJqcAlhdrmo\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Records matched successfully\",\n  \"data\": {\n    \"permissions\": [\n      {\n        \"id\": \"1038\",\n        \"permission_id\": \"8293\",\n        \"name\": \"Last Approved Plan\",\n        \"type\": \"OC\",\n        \"source\": \"global\",\n        \"permission_flag\": \"Flag\",\n        \"permission_status\": \"Applied\",\n        \"exp_date\": \"2026-08-27T00:00:00.000Z\",\n        \"remark\": \"Test for notification\",\n        \"assigned_user_id\": \"291\",\n        \"assigned_to\": \"291\",\n        \"updated_by\": \"Karn Barnwal\",\n        \"updated_by_id\": \"287\",\n        \"updated_by_role\": \"developer\",\n        \"categories\": [],\n        \"attachments\": [\n          {\n            \"file_id\": \"946\",\n            \"file_name\": \"Test.pdf\",\n            \"content_type\": \"application/pdf\",\n            \"size\": 0,\n            \"uploaded_at\": \"2026-07-24T08:41:51.977Z\",\n            \"uploaded_by\": \"291\",\n            \"view_url\": \"/permissions/projects/194/1038/documents/30/files/946\",\n            \"isActive\": true\n          },\n          {\n            \"file_id\": \"949\",\n            \"file_name\": \"backend-api-documentation (1).pdf\",\n            \"content_type\": \"application/pdf\",\n            \"size\": 0,\n            \"uploaded_at\": \"2026-07-27T11:53:42.188Z\",\n            \"uploaded_by\": \"291\",\n            \"view_url\": \"/permissions/projects/194/1038/documents/30/files/949\",\n            \"isActive\": true\n          },\n          {\n            \"file_id\": \"950\",\n            \"file_name\": \"backend-api-documentation (1).pdf\",\n            \"content_type\": \"application/pdf\",\n            \"size\": 0,\n            \"uploaded_at\": \"2026-07-27T11:54:43.970Z\",\n            \"uploaded_by\": \"291\",\n            \"view_url\": \"/permissions/projects/194/1038/documents/30/files/950\",\n            \"isActive\": true\n          },\n          {\n            \"file_id\": \"961\",\n            \"file_name\": \"Stallion Buildtech - MCHI pptx.pdf\",\n            \"content_type\": \"application/pdf\",\n            \"size\": 0,\n            \"uploaded_at\": \"2026-08-01T10:59:07.181Z\",\n            \"uploaded_by\": \"291\",\n            \"view_url\": \"/permissions/projects/194/1038/documents/30/files/961\",\n            \"isActive\": true\n          }\n        ],\n        \"lod_documents\": [\n          {\n            \"document_id\": \"33\",\n            \"name\": \"Form A (Fire) 1\",\n            \"attachments\": [\n              {\n                \"file_id\": \"911\",\n                \"file_name\": \"backend-api-documentation (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-21T04:36:27.700Z\",\n                \"uploaded_by\": \"287\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/33/files/911\",\n                \"isActive\": true\n              },\n              {\n                \"file_id\": \"895\",\n                \"file_name\": \"594c534b-d9a5-4f28-a2f7-560980ebfa9e (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-20T08:47:10.585Z\",\n                \"uploaded_by\": \"287\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/33/files/895\",\n                \"isActive\": true\n              }\n            ],\n            \"sort_order\": 0,\n            \"files\": [\n              {\n                \"file_id\": \"911\",\n                \"file_name\": \"backend-api-documentation (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-21T04:36:27.700Z\",\n                \"uploaded_by\": \"287\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/33/files/911\",\n                \"isActive\": true\n              },\n              {\n                \"file_id\": \"895\",\n                \"file_name\": \"594c534b-d9a5-4f28-a2f7-560980ebfa9e (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-20T08:47:10.585Z\",\n                \"uploaded_by\": \"287\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/33/files/895\",\n                \"isActive\": true\n              }\n            ],\n            \"dwg_files\": []\n          }\n        ],\n        \"document_sections\": {\n          \"permission\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [\n              {\n                \"file_id\": \"946\",\n                \"file_name\": \"Test.pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-24T08:41:51.977Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/30/files/946\",\n                \"isActive\": true\n              },\n              {\n                \"file_id\": \"949\",\n                \"file_name\": \"backend-api-documentation (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-27T11:53:42.188Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/30/files/949\",\n                \"isActive\": true\n              },\n              {\n                \"file_id\": \"950\",\n                \"file_name\": \"backend-api-documentation (1).pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-27T11:54:43.970Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/30/files/950\",\n                \"isActive\": true\n              },\n              {\n                \"file_id\": \"961\",\n                \"file_name\": \"Stallion Buildtech - MCHI pptx.pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-08-01T10:59:07.181Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/30/files/961\",\n                \"isActive\": true\n              }\n            ],\n            \"dwg_files\": [],\n            \"document_id\": \"30\",\n            \"document_row_id\": null\n          },\n          \"demand_note\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [\n              {\n                \"file_id\": \"1017\",\n                \"file_name\": \"file-sample_150kB.pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-08-06T09:04:30.268Z\",\n                \"uploaded_by\": \"287\",\n                \"view_url\": \"/permissions/projects/194/1038/documents/28/files/1017\",\n                \"isActive\": true\n              }\n            ],\n            \"dwg_files\": [],\n            \"document_id\": \"28\",\n            \"document_row_id\": null\n          },\n          \"receipt_note\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [],\n            \"dwg_files\": [],\n            \"document_id\": \"29\",\n            \"document_row_id\": null\n          }\n        }\n      },\n      {\n        \"id\": \"1039\",\n        \"permission_id\": \"8294\",\n        \"name\": \"Latest Approved Plan to submit\",\n        \"type\": \"IOD\",\n        \"source\": \"global\",\n        \"permission_flag\": \"Unflag\",\n        \"permission_status\": \"In Process\",\n        \"exp_date\": \"2026-09-02T00:00:00.000Z\",\n        \"remark\": \"\",\n        \"assigned_user_id\": \"454\",\n        \"assigned_to\": \"454\",\n        \"updated_by\": \"Karn Barnwal\",\n        \"updated_by_id\": \"287\",\n        \"updated_by_role\": \"developer\",\n        \"categories\": [],\n        \"attachments\": [\n          {\n            \"file_id\": \"947\",\n            \"file_name\": \"test.pdf\",\n            \"content_type\": \"application/pdf\",\n            \"size\": 0,\n            \"uploaded_at\": \"2026-07-24T11:30:26.335Z\",\n            \"uploaded_by\": \"291\",\n            \"view_url\": \"/permissions/projects/194/1039/documents/30/files/947\",\n            \"isActive\": true\n          }\n        ],\n        \"lod_documents\": [],\n        \"document_sections\": {\n          \"permission\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [\n              {\n                \"file_id\": \"947\",\n                \"file_name\": \"test.pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-07-24T11:30:26.335Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1039/documents/30/files/947\",\n                \"isActive\": true\n              }\n            ],\n            \"dwg_files\": [],\n            \"document_id\": \"30\",\n            \"document_row_id\": null\n          },\n          \"demand_note\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [\n              {\n                \"file_id\": \"1020\",\n                \"file_name\": \"TestDownload.pdf\",\n                \"content_type\": \"application/pdf\",\n                \"size\": 0,\n                \"uploaded_at\": \"2026-08-24T09:31:50.535Z\",\n                \"uploaded_by\": \"291\",\n                \"view_url\": \"/permissions/projects/194/1039/documents/28/files/1020\",\n                \"isActive\": true\n              }\n            ],\n            \"dwg_files\": [],\n            \"document_id\": \"28\",\n            \"document_row_id\": null\n          },\n          \"receipt_note\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [],\n            \"dwg_files\": [],\n            \"document_id\": \"29\",\n            \"document_row_id\": null\n          }\n        }\n      },\n      {\n        \"id\": \"2690\",\n        \"permission_id\": \"8295\",\n        \"name\": \"'P' Form for permanent water conn.\",\n        \"type\": \"IOD\",\n        \"source\": \"global\",\n        \"permission_flag\": \"Unflag\",\n        \"permission_status\": \"Payment Due\",\n        \"exp_date\": \"2026-09-25T00:00:00.000Z\",\n        \"remark\": \"Test notification\",\n        \"assigned_user_id\": \"454\",\n        \"assigned_to\": \"454\",\n        \"updated_by\": \"Karn Barnwal\",\n        \"updated_by_id\": \"287\",\n        \"updated_by_role\": \"developer\",\n        \"categories\": [],\n        \"attachments\": [],\n        \"lod_documents\": [],\n        \"document_sections\": {\n          \"permission\": {\n            \"supported_types\": [\n              \"dwg\",\n              \"pdf\"\n            ],\n            \"files\": [],\n            \"dwg_files\": [],\n            \"document_id\": \"30\",\n            \"document_row_id\": null\n          }\n        }\n      }\n    ],\n    \"total_permissions\": 3\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "2 Update Permission Details",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "// Any of the following can be updated \n\n// Expiry date in yyyy-mm-dd format \n// remark is String\n// permission_status : enum \"Pending\", \"Applied\", \"In Process\", \"Issued\", \"Payment Due\", \"Rejected\", \"Document Missing\", \"Not Applied\", \"Paid\"\n// assigned_to : \"user_id\"\n\n// {\n//     \"exp_date\" : \"2026-07-25\"\n// }\n\n// {\n//     \"remark\" : \"ab\"\n// }\n\n\n{\n    \"permission_status\" : \"Issued\"\n}\n\n\n/*\n{\n    \"assigned_to\" : \"282\"\n}\n*/",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/permissions/projects/:projectId/:transProjectPerId",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "permissions",
+            "projects",
+            ":projectId",
+            ":transProjectPerId"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "194"
+            },
+            {
+              "key": "transProjectPerId",
+              "value": "1038"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3 Upload Documents in the Sub Permissions",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-project-id",
+            "value": "190"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "document_id",
+              "value": "869",
+              "type": "text"
+            },
+            {
+              "key": "sub_document_type",
+              "value": "permission",
+              "type": "text",
+              "description": "permission, demand_note, or receipt_note"
+            },
+            {
+              "key": "file",
+              "type": "file",
+              "description": "dwg or pdf only",
+              "src": "/Users/krush/Downloads/backend-api-documentation (1).pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseURL}}/permissions/projects/:projectId/:transProjectPerId/documents/upload",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "permissions",
+            "projects",
+            ":projectId",
+            ":transProjectPerId",
+            "documents",
+            "upload"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "190"
+            },
+            {
+              "key": "transProjectPerId",
+              "value": "699"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4 View Document in Sub Permission and LOD",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/permissions/projects/:projectId/:transProjectPerId/documents/:fileId/view",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "permissions",
+            "projects",
+            ":projectId",
+            ":transProjectPerId",
+            "documents",
+            ":fileId",
+            "view"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "194"
+            },
+            {
+              "key": "transProjectPerId",
+              "value": "1038"
+            },
+            {
+              "key": "fileId",
+              "value": "946"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

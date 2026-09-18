@@ -1,0 +1,1679 @@
+{
+  "info": {
+    "_postman_id": "f9e90310-249b-410f-82f6-a340e9458224",
+    "name": "APIs for User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58285933",
+    "_collection_link": "https://go.postman.co/collection/58285933-f9e90310-249b-410f-82f6-a340e9458224?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1 User Login With Mobile Number (Send OTP)",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"mobile_number\": \"8291598930\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/auth/send-otp",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "auth",
+            "send-otp"
+          ]
+        },
+        "description": "## User Login With Mobile Number (Send OTP)\n\nInitiates the user login flow by sending a One-Time Password (OTP) to the specified mobile number via SMS. This is the first step in the two-step mobile authentication process.\n\n---\n\n### Endpoint\n\n`POST {{baseURL}}/auth/send-otp`\n\n---\n\n### Authentication\n\nNone required.\n\n---\n\n### Request Body\n\n**Content-Type:** `application/json`\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| `mobile_number` | `string` | ✅ Required | The user's registered mobile number to which the OTP will be sent. |\n\n**Example:**\n```json\n{\n    \"mobile_number\": \"8291598930\"\n}\n```\n\n---\n\n### Response\n\n#### 200 OK — OTP Sent Successfully\n\n```json\n{\n  \"success\": true,\n  \"message\": \"OTP Sent successfully\",\n  \"data\": {\n    \"expires_in_seconds\": 600,\n    \"channel\": \"sms\"\n  }\n}\n```\n\n| Field | Type | Description |\n|---|---|---|\n| `success` | `boolean` | Indicates whether the OTP was sent successfully. |\n| `message` | `string` | A human-readable status message. |\n| `data.expires_in_seconds` | `number` | The validity duration of the OTP in seconds (e.g. `600` = 10 minutes). |\n| `data.channel` | `string` | The delivery channel used to send the OTP (e.g. `\"sms\"`). |\n\n---\n\n### Notes\n\n- The OTP expires **10 minutes** (600 seconds) after it is sent.\n- OTPs are delivered via **SMS** to the provided mobile number.\n- After receiving the OTP, use the **Verify OTP** endpoint to complete authentication.\n- Ensure the mobile number is registered in the system before calling this endpoint."
+      },
+      "response": [
+        {
+          "name": "1 User Login With Mobile Number (Send OTP)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"mobile_number\": \"8291598930\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/send-otp",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "send-otp"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:49:47 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "100"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"64-GvDcqsJSpaHUpbdjlC0GD/X36dc\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"OTP Sent successfully\",\n  \"data\": {\n    \"expires_in_seconds\": 600,\n    \"channel\": \"sms\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "2 User Verification With OTP (Verify OTP)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Parse the JSON response body from your backend\nconst responseData = pm.response.json();\n\n// 2. Extract the token from inside the \"data\" object\nconst token = responseData.data.token;\n\n// 3. Save it to your active environment variables\nif (token) {\n    pm.environment.set(\"authToken\", token);\n    console.log(\"✅ Token successfully auto-saved to environment!\");\n} else {\n    console.error(\"❌ Token not found. Please check the response structure.\");\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"mobile_number\": \"8291598930\",\n    \"code\": \"1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/auth/verify-otp",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "auth",
+            "verify-otp"
+          ]
+        },
+        "description": "## User Verification With OTP (Verify OTP)\n\nVerifies a user's identity by validating the OTP (One-Time Password) sent to their registered mobile number. On successful verification, the server returns a JWT auth token along with the user's profile details.\n\n---\n\n### Endpoint\n\n`POST {{baseURL}}/auth/verify-otp`\n\n---\n\n### Request Body\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `mobile_number` | string | Yes | The user's registered mobile number. |\n| `code` | string | Yes | The OTP code received on the mobile number. |\n\n**Example:**\n\n``` json\n{\n    \"mobile_number\": \"8291598930\",\n    \"code\": \"1234\"\n}\n\n ```\n\n---\n\n### Response\n\n**Success (200 OK)**\n\n``` json\n{\n    \"success\": true,\n    \"message\": \"Login successfull\",\n    \"data\": {\n        \"token\": \"<JWT_TOKEN>\",\n        \"user\": {\n            \"id\": \"439\",\n            \"name\": \"Krushang\",\n            \"email\": \"user@example.com\",\n            \"username\": null,\n            \"two_fac_auth\": false,\n            \"role\": \"user\",\n            \"developer_id\": \"353\",\n            \"project_ids\": [\"206\", \"208\", \"226\", \"231\"]\n        }\n    }\n}\n\n ```\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `success` | boolean | Indicates whether the request was successful. |\n| `message` | string | Human-readable status message. |\n| `data.token` | string | JWT token to be used for authenticating subsequent requests. |\n| `data.user.id` | string | Unique identifier of the user. |\n| `data.user.name` | string | Display name of the user. |\n| `data.user.email` | string | Email address of the user. |\n| `data.user.role` | string | Role assigned to the user (e.g., `user`). |\n| `data.user.developer_id` | string | Associated developer account ID. |\n| `data.user.project_ids` | array | List of project IDs the user has access to. |\n| `data.user.two_fac_auth` | boolean | Whether two-factor authentication is enabled. |\n\n---\n\n### Post-Response Script\n\nAfter a successful response, the `authToken` environment variable is automatically set to the returned JWT token. This token is then used by subsequent requests in the collection for authenticated API calls.\n\n---\n\n### Notes\n\n- The `authToken` environment variable must be set before calling any authenticated endpoints. This request handles that automatically on success.\n    \n- Ensure the correct `baseURL` environment variable is configured before sending this request.\n    \n- The `authToken` is also known as the `masterToken` in the application and is mainly used for most of the APIs in this collection.\n    \n- The list of APIs that use `authToken` / `masterToken` are\n    \n\n1. \"3 Get All Project Details For a User\"\n    \n2. \"4 Get Project Specific Token\"\n    \n3. \"5 Get all notifications\"\n    \n4. \"6 Get Profile Details Of User\"\n    \n5. \"7 Get Specific Details Of a Project For a User\"\n    \n6. \"8 Get List Of Towers For a Project\"\n    \n7. \"10 List of Users for a Developer\"\n    \n8. \"11 List of User for a particular Project\""
+      },
+      "response": [
+        {
+          "name": "2 User Verification With OTP (Verify OTP)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"mobile_number\": \"8291598930\",\n    \"code\": \"1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/verify-otp",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "verify-otp"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:49:51 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "497"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1f1-wH7gCcIrQf8p289rCeajn4+907Y\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Login successfull\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDM5IiwiZGV2ZWxvcGVyX2lkIjoiMzUzIiwicm9sZSI6InVzZXIiLCJ0b2tlbl92ZXJzaW9uIjoyLCJpYXQiOjE3ODk2MzEzOTEsImV4cCI6MTc4OTY2NzM5MX0.LROYgx-VUTtQSZ_421N2qnbtaemhB7W398XEKZMAVBE\",\n    \"user\": {\n      \"id\": \"439\",\n      \"name\": \"Krushang\",\n      \"email\": \"krushang.1785929531766-0-k996@stallionemployee.com\",\n      \"username\": null,\n      \"two_fac_auth\": false,\n      \"role\": \"user\",\n      \"developer_id\": \"353\",\n      \"project_ids\": [\n        \"206\",\n        \"208\",\n        \"226\",\n        \"231\"\n      ]\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "3 Get All Project Details For a User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/projects/mobile",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "projects",
+            "mobile"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "3 Get All Project Details For a User",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/projects/mobile",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "projects",
+                "mobile"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:49:58 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "11723"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"2dcb-jt02gBl5JeNUef1B8ACk9HrnHCk\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Mobile projects fetched successfully\",\n  \"data\": {\n    \"total_projects\": 31,\n    \"projects\": [\n      {\n        \"id\": \"216\",\n        \"name\": \"Trump\",\n        \"developer_id\": \"408\",\n        \"location\": \"New York\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Trump\",\n        \"project_image_url\": null,\n        \"profile_id\": \"414\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          }\n        ]\n      },\n      {\n        \"id\": \"218\",\n        \"name\": \"Stark Industries\",\n        \"developer_id\": \"408\",\n        \"location\": \"New York\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Trump\",\n        \"project_image_url\": \"/projects/218/image\",\n        \"profile_id\": \"414\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          }\n        ]\n      },\n      {\n        \"id\": \"206\",\n        \"name\": \"Bliss\",\n        \"developer_id\": \"353\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Livingstones Infra\",\n        \"project_image_url\": null,\n        \"profile_id\": \"439\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"208\",\n        \"name\": \"Viva\",\n        \"developer_id\": \"353\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Livingstones Infra\",\n        \"project_image_url\": \"/projects/208/image\",\n        \"profile_id\": \"439\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"226\",\n        \"name\": \"Premium\",\n        \"developer_id\": \"353\",\n        \"location\": \"Girgoan\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Livingstones Infra\",\n        \"project_image_url\": null,\n        \"profile_id\": \"439\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"231\",\n        \"name\": \"RCC\",\n        \"developer_id\": \"353\",\n        \"location\": \"Survey No. 42, Near Hiranandani Gardens, Powai, Mumbai, Maharashtra – 400076\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Livingstones Infra\",\n        \"project_image_url\": \"/projects/231/image\",\n        \"profile_id\": \"439\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"201\",\n        \"name\": \"Mahada\",\n        \"developer_id\": \"311\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Ali Developers\",\n        \"project_image_url\": null,\n        \"profile_id\": \"365\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"54\",\n            \"name\": \"Sales \"\n          },\n          {\n            \"id\": \"53\",\n            \"name\": \"My Contracts\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          }\n        ]\n      },\n      {\n        \"id\": \"207\",\n        \"name\": \"Medusa\",\n        \"developer_id\": \"355\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tiger & Co\",\n        \"project_image_url\": null,\n        \"profile_id\": \"366\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          }\n        ]\n      },\n      {\n        \"id\": \"195\",\n        \"name\": \"Altamount\",\n        \"developer_id\": \"296\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Batman & Co\",\n        \"project_image_url\": null,\n        \"profile_id\": \"362\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"48\",\n            \"name\": \"Masonry\"\n          },\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"50\",\n            \"name\": \"Accounts Management (Inc. PO & WO)\"\n          },\n          {\n            \"id\": \"49\",\n            \"name\": \"Finishing\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          }\n        ]\n      },\n      {\n        \"id\": \"217\",\n        \"name\": \"Krushang Luxe\",\n        \"developer_id\": \"417\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Krushang Heights\",\n        \"project_image_url\": null,\n        \"profile_id\": \"417\",\n        \"role in this project\": null,\n        \"role\": null,\n        \"modules\": [\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          }\n        ]\n      },\n      {\n        \"id\": \"194\",\n        \"name\": \"Sharda Project\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/194/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"197\",\n        \"name\": \"Aastha Towers\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/197/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"200\",\n        \"name\": \"Arcadia\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/200/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"209\",\n        \"name\": \"testing validation\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"211\",\n        \"name\": \"Asmi Dreamz\",\n        \"developer_id\": \"287\",\n        \"location\": \"Anand aashram\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/211/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"212\",\n        \"name\": \"ASMI DREAMZ\",\n        \"developer_id\": \"287\",\n        \"location\": \"NAN\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"213\",\n        \"name\": \"PROJECT ASMI\",\n        \"developer_id\": \"287\",\n        \"location\": \"22\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"214\",\n        \"name\": \"SURBHI APARTMENT\",\n        \"developer_id\": \"287\",\n        \"location\": \"ss\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"232\",\n        \"name\": \"new project 27/08\",\n        \"developer_id\": \"287\",\n        \"location\": \"hyh\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/232/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"233\",\n        \"name\": \"RCC Testing\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"234\",\n        \"name\": \"Slab Testing\",\n        \"developer_id\": \"287\",\n        \"location\": \"Andheri\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"235\",\n        \"name\": \"Latent\",\n        \"developer_id\": \"287\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": null,\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"245\",\n        \"name\": \"Trail 01-09\",\n        \"developer_id\": \"287\",\n        \"location\": \"dd\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Tata pvt Ltd\",\n        \"project_image_url\": \"/projects/245/image\",\n        \"profile_id\": \"291\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          }\n        ]\n      },\n      {\n        \"id\": \"236\",\n        \"name\": \"Stark power\",\n        \"developer_id\": \"425\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"223\",\n        \"name\": \"Infinity Castle\",\n        \"developer_id\": \"425\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": false,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": \"/projects/223/image\",\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"228\",\n        \"name\": \"Empire States\",\n        \"developer_id\": \"425\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": \"/projects/228/image\",\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"229\",\n        \"name\": \"Stallion\",\n        \"developer_id\": \"425\",\n        \"location\": \"Mumbai\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"243\",\n        \"name\": \"September Test\",\n        \"developer_id\": \"425\",\n        \"location\": \"Nagpada\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"244\",\n        \"name\": \"Sitambar Test\",\n        \"developer_id\": \"425\",\n        \"location\": \"Marines\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"246\",\n        \"name\": \"2nd September\",\n        \"developer_id\": \"425\",\n        \"location\": \"Stallion\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      },\n      {\n        \"id\": \"247\",\n        \"name\": \"10th Sept\",\n        \"developer_id\": \"425\",\n        \"location\": \"10th Sept\",\n        \"status\": \"planned\",\n        \"exactlyOneTower\": true,\n        \"company_name\": \"Amaan1580\",\n        \"project_image_url\": null,\n        \"profile_id\": \"429\",\n        \"role in this project\": \"user\",\n        \"role\": \"user\",\n        \"modules\": [\n          {\n            \"id\": \"47\",\n            \"name\": \"RCC\"\n          },\n          {\n            \"id\": \"58\",\n            \"name\": \"Permissions \"\n          },\n          {\n            \"id\": \"59\",\n            \"name\": \"Legal\"\n          },\n          {\n            \"id\": \"66\",\n            \"name\": \"S.O.P.\"\n          },\n          {\n            \"id\": \"67\",\n            \"name\": \"Templates\"\n          }\n        ]\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "4 Get Project Specific Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// 1. Parse the JSON response body from your backend\nconst responseData = pm.response.json();\n\n// 2. Extract the token from inside the \"data\" object\nconst token = responseData.data.token;\n\n// 3. Save it to your active environment variables\nif (token) {\n    pm.environment.set(\"projectToken\", token);\n    console.log(\"✅ Switched authToken successfully auto-saved to environment!\");\n} else {\n    console.error(\"❌ Token not found. Please check the response structure.\");\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"project_id\": \"194\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/auth/mobile/switch-by-project?=194",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "auth",
+            "mobile",
+            "switch-by-project"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "194"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "4 Get Project Specific Token",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"project_id\": \"194\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/mobile/switch-by-project?=194",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "mobile",
+                "switch-by-project"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "194"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:52:11 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "535"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"217-eXwSnjbR0odlgQ7Ij66Np3THlfs\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Login successfull\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDM5IiwiZGV2ZWxvcGVyX2lkIjoiMjg3Iiwicm9sZSI6InVzZXIiLCJ0b2tlbl92ZXJzaW9uIjoyLCJpYXQiOjE3ODk2MzE1MzEsImV4cCI6MTc4OTY2NzUzMX0.lUy-aN-JEglTIouJlmHO_7ZhGyy8O8EYOIvXO_1rluE\",\n    \"user\": {\n      \"id\": \"291\",\n      \"name\": \"Krushang\",\n      \"email\": \"krushang.1784198296525-0-i8uq@stallionemployee.com\",\n      \"two_fac_auth\": false,\n      \"role\": \"user\",\n      \"developer_id\": \"287\",\n      \"project_ids\": [\n        \"194\",\n        \"197\",\n        \"200\",\n        \"209\",\n        \"211\",\n        \"212\",\n        \"213\",\n        \"214\",\n        \"232\",\n        \"233\",\n        \"234\",\n        \"235\",\n        \"245\"\n      ]\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "5 Get all notifications",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/notifications?page=0&limit=15",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "notifications"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "limit",
+              "value": "15"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "5 Get all notifications",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/notifications?page=0&limit=15",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "notifications"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "15"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:52:31 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "6977"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"1b41-NuCzhShzGmlyQLTCtldpC/IMJgc\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Notifications fetched successfully\",\n  \"data\": {\n    \"meta\": {\n      \"total_notifications\": 1933,\n      \"current_page\": 1,\n      \"total_pages\": 129,\n      \"limit\": 15,\n      \"has_next_page\": true\n    },\n    \"notifications\": [\n      {\n        \"id\": \"10979\",\n        \"user_id\": \"291\",\n        \"title\": \"SOP Submitted\",\n        \"body\": \"Barricading has been submitted by Amaan Ansari for Tower Name 1 at Infinity Castle.\",\n        \"type\": \"sop_submitted\",\n        \"is_read\": false,\n        \"created_at\": \"2026-09-16T06:47:58.100Z\",\n        \"project_id\": \"223\",\n        \"tower_id\": \"185\",\n        \"profile_id\": \"291\",\n        \"project_name\": null,\n        \"project_location\": null,\n        \"response\": {\n          \"category_id\": \"142\",\n          \"project_id\": \"223\",\n          \"tower_id\": \"185\"\n        },\n        \"category_id\": \"142\"\n      },\n      {\n        \"id\": \"10974\",\n        \"user_id\": \"291\",\n        \"title\": \"SOP Submitted\",\n        \"body\": \"Barricading has been submitted by Amaan Ansari for Tower Name 2 at Infinity Castle.\",\n        \"type\": \"sop_submitted\",\n        \"is_read\": false,\n        \"created_at\": \"2026-09-16T06:47:14.131Z\",\n        \"project_id\": \"223\",\n        \"tower_id\": \"191\",\n        \"profile_id\": \"291\",\n        \"project_name\": null,\n        \"project_location\": null,\n        \"response\": {\n          \"category_id\": \"142\",\n          \"project_id\": \"223\",\n          \"tower_id\": \"191\"\n        },\n        \"category_id\": \"142\"\n      },\n      {\n        \"id\": \"10971\",\n        \"user_id\": \"291\",\n        \"title\": \"\",\n        \"body\": \"Latest Approved Plan to submit status has been updated to Issued by Karn Barnwal in Permission at Trail 01-09.\",\n        \"type\": \"permission_status_update\",\n        \"reference_id\": \"6360\",\n        \"is_read\": false,\n        \"created_at\": \"2026-09-09T08:33:37.653Z\",\n        \"project_id\": \"245\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Trail 01-09\",\n        \"project_location\": \"dd\",\n        \"response\": {\n          \"project_id\": \"245\",\n          \"permission_id\": \"6360\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10965\",\n        \"user_id\": \"291\",\n        \"title\": \"\",\n        \"body\": \"Public Notice status has been updated to applied by Karn Barnwal in Legal at Aastha Towers.\",\n        \"type\": \"legal_status_update\",\n        \"reference_id\": \"80\",\n        \"is_read\": false,\n        \"created_at\": \"2026-09-08T13:02:44.354Z\",\n        \"project_id\": \"197\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Aastha Towers\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"197\",\n          \"legal_id\": \"80\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10963\",\n        \"user_id\": \"291\",\n        \"title\": \"\",\n        \"body\": \"Last Approved Plan status has been updated to In Process by Vaibhav Pednekar in Permission at Bliss.\",\n        \"type\": \"permission_status_update\",\n        \"reference_id\": \"4673\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-29T04:54:15.902Z\",\n        \"project_id\": \"206\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Bliss\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"206\",\n          \"permission_id\": \"4673\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10956\",\n        \"user_id\": \"291\",\n        \"title\": \"Legal Action Alert\",\n        \"body\": \"The legal notification date for \\\"Best CIS Report\\\" in project \\\"Sharda Project\\\" is coming up today (2026-08-27).\",\n        \"type\": \"legal_expiry_alert\",\n        \"reference_id\": \"4\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-27T05:30:01.270Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"legal_id\": \"4\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10951\",\n        \"user_id\": \"291\",\n        \"title\": \"Legal Action Alert\",\n        \"body\": \"The legal notification date for \\\"Developer Specific NOC\\\" in project \\\"Sharda Project\\\" is coming up today (2026-08-27).\",\n        \"type\": \"legal_expiry_alert\",\n        \"reference_id\": \"175\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-27T05:30:00.626Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"legal_id\": \"175\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10947\",\n        \"user_id\": \"291\",\n        \"title\": \"SOP Submitted\",\n        \"body\": \"25Aug has been submitted by Krushang for Tower Name 1 at Sharda Project.\",\n        \"type\": \"sop_submitted\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-27T05:12:54.628Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": \"147\",\n        \"profile_id\": \"291\",\n        \"project_name\": null,\n        \"project_location\": null,\n        \"response\": {\n          \"category_id\": \"278\",\n          \"project_id\": \"194\",\n          \"tower_id\": \"147\"\n        },\n        \"category_id\": \"278\"\n      },\n      {\n        \"id\": \"10944\",\n        \"user_id\": \"291\",\n        \"title\": \"New Task Assigned\",\n        \"body\": \"You have been assigned a new task: \\\"Test 27th Aug\\\" in Tower Name 1 at Sharda Project by Someone.\",\n        \"type\": \"task_assigned\",\n        \"reference_id\": \"74\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-27T04:53:25.225Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": \"147\",\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"tower_id\": \"147\",\n          \"task_id\": \"74\"\n        }\n      },\n      {\n        \"id\": \"10943\",\n        \"user_id\": \"291\",\n        \"title\": \"New Action Item Assigned\",\n        \"body\": \"You have been assigned an action item during \\\"New test meeting\\\" in Tower Name 1, Sharda Project by Someone.\",\n        \"type\": \"meeting_task_assigned\",\n        \"reference_id\": \"73\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-27T04:50:33.220Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": \"147\",\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"tower_id\": \"147\",\n          \"task_id\": \"73\"\n        }\n      },\n      {\n        \"id\": \"10938\",\n        \"user_id\": \"291\",\n        \"title\": \"Legal Action Alert\",\n        \"body\": \"The legal notification date for \\\"Best CIS Report\\\" in project \\\"Sharda Project\\\" is coming up today (2026-08-26).\",\n        \"type\": \"legal_expiry_alert\",\n        \"reference_id\": \"4\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-26T05:30:11.372Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"legal_id\": \"4\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10934\",\n        \"user_id\": \"291\",\n        \"title\": \"Legal Action Alert\",\n        \"body\": \"The legal notification date for \\\"BMC Orders\\\" in project \\\"Sharda Project\\\" is coming up in 30 days (2026-09-25).\",\n        \"type\": \"legal_expiry_alert\",\n        \"reference_id\": \"145\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-26T05:30:03.588Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"legal_id\": \"145\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10928\",\n        \"user_id\": \"291\",\n        \"title\": \"Legal Action Alert\",\n        \"body\": \"The legal notification date for \\\"Title Deed\\\" in project \\\"Sharda Project\\\" is coming up in 7 days (2026-09-02).\",\n        \"type\": \"legal_expiry_alert\",\n        \"reference_id\": \"172\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-26T05:30:02.934Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"legal_id\": \"172\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10923\",\n        \"user_id\": \"291\",\n        \"title\": \"Permission Expiry Alert\",\n        \"body\": \"The permission \\\"'P' Form for permanent water conn.\\\" for project \\\"Sharda Project\\\" is expiring in 30 days (2026-09-25).\",\n        \"type\": \"permission_expiry_alert\",\n        \"reference_id\": \"2690\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-26T05:30:02.032Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"permission_id\": \"2690\",\n          \"towar_id\": null\n        }\n      },\n      {\n        \"id\": \"10918\",\n        \"user_id\": \"291\",\n        \"title\": \"Permission Expiry Alert\",\n        \"body\": \"The permission \\\"Latest Approved Plan to submit\\\" for project \\\"Sharda Project\\\" is expiring in 7 days (2026-09-02).\",\n        \"type\": \"permission_expiry_alert\",\n        \"reference_id\": \"1039\",\n        \"is_read\": false,\n        \"created_at\": \"2026-08-26T05:30:01.326Z\",\n        \"project_id\": \"194\",\n        \"tower_id\": null,\n        \"profile_id\": \"291\",\n        \"project_name\": \"Sharda Project\",\n        \"project_location\": \"Mumbai\",\n        \"response\": {\n          \"project_id\": \"194\",\n          \"permission_id\": \"1039\",\n          \"towar_id\": null\n        }\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "6 Get Profile Details Of User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/auth/me",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "6 Get Profile Details Of User",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/auth/me",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:52:52 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "836"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"344-ATKzdRgKI7S6tgpyXr58YYIxuOo\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Profile context metrics fetched successfully\",\n  \"data\": {\n    \"id\": \"439\",\n    \"name\": \"Krushang\",\n    \"mobile_no\": \"8291598930\",\n    \"designation\": \"Developer\",\n    \"email\": \"krushang.1785929531766-0-k996@stallionemployee.com\",\n    \"company_name\": null,\n    \"company_address\": null,\n    \"company_size\": null,\n    \"completed_project_count\": 0,\n    \"ongoing_projects\": 0,\n    \"features_interested_in\": [],\n    \"portal_access\": true,\n    \"two_fac_auth\": false,\n    \"developer_request_status\": null,\n    \"subscription_details\": {},\n    \"role\": \"user\",\n    \"created_at\": \"2026-08-05T11:32:11.895Z\",\n    \"updated_at\": \"2026-09-16T06:25:10.136Z\",\n    \"username\": null,\n    \"token_version\": 2,\n    \"parent_developer_id\": \"353\",\n    \"profile_image_key\": null,\n    \"profile_image_url\": null,\n    \"signature_url\": null,\n    \"access_request\": null,\n    \"projects\": [\n      {\n        \"id\": \"206\",\n        \"name\": \"Bliss\"\n      },\n      {\n        \"id\": \"208\",\n        \"name\": \"Viva\"\n      },\n      {\n        \"id\": \"226\",\n        \"name\": \"Premium\"\n      },\n      {\n        \"id\": \"231\",\n        \"name\": \"RCC\"\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "7 Get Specific Details Of a Project For a User",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/projects/:projectId",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "projects",
+            ":projectId"
+          ],
+          "variable": [
+            {
+              "key": "projectId",
+              "value": "194"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "7 Get Specific Details Of a Project For a User",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/projects/:projectId",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "projects",
+                ":projectId"
+              ],
+              "variable": [
+                {
+                  "key": "projectId",
+                  "value": "194"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:53:11 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "1408"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"580-gU9ktAHm2aM0COMq6OZ6aRzcJog\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Project fetched successfully\",\n  \"data\": {\n    \"id\": \"194\",\n    \"developer_id\": \"287\",\n    \"name\": \"Sharda Project\",\n    \"location\": \"Mumbai\",\n    \"project_image_url\": \"/projects/194/image\",\n    \"project_access\": true,\n    \"company_name\": \"Tata pvt Ltd\",\n    \"company_address\": \"Griffin and Hodge Inc\",\n    \"company_size\": \"SIZE_12_50\",\n    \"completed_proj_count\": 0,\n    \"ongoing_project_count\": 0,\n    \"subscription_plan\": \"Prime (5 Year) 5 Tower\",\n    \"subscription_start_date\": \"2026-07-17T00:00:00.000Z\",\n    \"subscription_ends_at\": \"2031-07-17T00:00:00.000Z\",\n    \"features_interested_in\": \"[]\",\n    \"status\": \"planned\",\n    \"is_enabled\": true,\n    \"lod_status\": \"active\",\n    \"contact_name\": \"Karn Barnwal\",\n    \"mobile_no\": \"+911233539444\",\n    \"email_address\": \"karn@stallion.build\",\n    \"society_name\": \"Test society\",\n    \"rera_number\": \"abcdefghuijh232\",\n    \"area_name\": \"test area value\",\n    \"land_cost\": \"0\",\n    \"pan_number\": \"STVPL7253G\",\n    \"gst_number\": \"27ABCDE1234F1Z5\",\n    \"gst_value_percent\": \"0\",\n    \"state\": \"Maharashtra\",\n    \"city\": \"Mumbai\",\n    \"project_address\": \"Mumbai test value\",\n    \"project_est_date\": null,\n    \"developer_email_id\": null,\n    \"purchase_order_email_id\": null,\n    \"work_order_email_id\": null,\n    \"reissue_email_po_wo\": true,\n    \"data_segregation\": true,\n    \"slab_completion_from_email\": null,\n    \"slab_completion_to_email\": \"\",\n    \"cc_email_id\": \"\",\n    \"overview_to_email_id\": \"\",\n    \"account_coordinator\": null,\n    \"site_coordinators\": \"[]\",\n    \"prior_notification_before_expiry\": 30,\n    \"apply_dwg\": true,\n    \"created_at\": \"2026-07-16T10:35:10.674Z\",\n    \"updated_at\": \"2026-09-09T08:11:09.938Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "8 Get List Of Towers For a Project",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/towers?project_id=194",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "towers"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "194"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "8 Get List Of Towers For a Project",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/towers?project_id=194",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "towers"
+              ],
+              "query": [
+                {
+                  "key": "project_id",
+                  "value": "194"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:53:24 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "1192"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"4a8-MpCiYBkRHbfXt4C+Y+NFnVAkHL4\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Towers fetched successfully\",\n  \"data\": [\n    {\n      \"id\": \"159\",\n      \"project_id\": \"194\",\n      \"name\": \"Tower Name 2\",\n      \"floors\": 7,\n      \"number_of_basement\": 0,\n      \"number_of_slab\": 0,\n      \"allow_centerline_drawing\": false,\n      \"isActive\": true,\n      \"restrict_checklist_category\": false,\n      \"allow_section_drawing\": false,\n      \"rera_details\": \"\",\n      \"tower_image_url\": null,\n      \"created_at\": \"2026-07-21T05:05:08.304Z\",\n      \"updated_at\": \"2026-08-29T11:01:11.238Z\",\n      \"wings_count\": 0,\n      \"units_count\": 0\n    },\n    {\n      \"id\": \"160\",\n      \"project_id\": \"194\",\n      \"name\": \"Tower Name 3\",\n      \"floors\": 6,\n      \"number_of_basement\": 0,\n      \"number_of_slab\": 0,\n      \"allow_centerline_drawing\": false,\n      \"isActive\": true,\n      \"restrict_checklist_category\": false,\n      \"allow_section_drawing\": false,\n      \"rera_details\": \"\",\n      \"tower_image_url\": null,\n      \"created_at\": \"2026-07-21T05:05:08.304Z\",\n      \"updated_at\": \"2026-08-29T11:01:11.279Z\",\n      \"wings_count\": 0,\n      \"units_count\": 0\n    },\n    {\n      \"id\": \"147\",\n      \"project_id\": \"194\",\n      \"name\": \"Tower Name 1\",\n      \"floors\": 8,\n      \"number_of_basement\": 0,\n      \"number_of_slab\": 0,\n      \"allow_centerline_drawing\": false,\n      \"isActive\": true,\n      \"restrict_checklist_category\": false,\n      \"allow_section_drawing\": false,\n      \"rera_details\": null,\n      \"tower_image_url\": null,\n      \"created_at\": \"2026-07-16T10:35:10.674Z\",\n      \"updated_at\": \"2026-08-29T11:01:11.195Z\",\n      \"wings_count\": 0,\n      \"units_count\": 0\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "9 List of Assigned Modules",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/modules/assignable",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "modules",
+            "assignable"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "9 List of Assigned Modules",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/modules/assignable",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "modules",
+                "assignable"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:53:42 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "236"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"ec-Knf5Mm26LrlPP+0tY2DRxb/5Bsg\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Licensed developer scope modules fetched successfully\",\n  \"data\": [\n    {\n      \"id\": \"59\",\n      \"name\": \"Legal\"\n    },\n    {\n      \"id\": \"58\",\n      \"name\": \"Permissions \"\n    },\n    {\n      \"id\": \"47\",\n      \"name\": \"RCC\"\n    },\n    {\n      \"id\": \"66\",\n      \"name\": \"S.O.P.\"\n    },\n    {\n      \"id\": \"67\",\n      \"name\": \"Templates\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "10 List of Users for a Developer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/developers/:parentDeveloperId/users",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "developers",
+            ":parentDeveloperId",
+            "users"
+          ],
+          "variable": [
+            {
+              "key": "parentDeveloperId",
+              "value": "287"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "10 List of Users for a Developer",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/developers/:parentDeveloperId/users",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "developers",
+                ":parentDeveloperId",
+                "users"
+              ],
+              "variable": [
+                {
+                  "key": "parentDeveloperId",
+                  "value": "287"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:55:04 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "10872"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"2a78-+CGl6idSZ11TtqR91cbbDDwVt+U\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Developer & Employees retrieved\",\n  \"data\": [\n    {\n      \"id\": \"288\",\n      \"name\": \"Karn Barnwal\",\n      \"mobile_no\": \"1233539444\",\n      \"designation\": \"user\",\n      \"email\": \"karn@stallion.build\",\n      \"company_name\": \"Tata pvt Ltd\",\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"user\",\n      \"created_at\": \"2026-07-16T10:32:55.472Z\",\n      \"updated_at\": \"2026-08-24T07:06:11.090Z\",\n      \"username\": null,\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": \"https://myapp-prod-uploads-018982314443-ap-south-1-an.s3.ap-south-1.amazonaws.com/stallion-dev/karn-barnwal/employees/karn-barnwal/signature-1784608653302.png\",\n      \"access_request\": null,\n      \"is_workspace_owner\": true\n    },\n    {\n      \"id\": \"487\",\n      \"name\": \"Ali\",\n      \"mobile_no\": \"2342343344\",\n      \"designation\": null,\n      \"email\": \"emp_a92a866d@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-17T07:49:15.364Z\",\n      \"updated_at\": \"2026-09-17T07:49:15.364Z\",\n      \"username\": \"emp_08f471eb\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"486\",\n      \"name\": \"Anmol Singh\",\n      \"mobile_no\": \"9930097857\",\n      \"designation\": null,\n      \"email\": \"emp_d43afcbd@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-17T07:49:15.256Z\",\n      \"updated_at\": \"2026-09-17T07:49:15.256Z\",\n      \"username\": \"emp_e9809f02\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"485\",\n      \"name\": \"Karn Contractor\",\n      \"mobile_no\": \"9930097857\",\n      \"designation\": null,\n      \"email\": \"emp_73a78936@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-17T06:47:40.501Z\",\n      \"updated_at\": \"2026-09-17T06:47:40.501Z\",\n      \"username\": \"emp_7b6811c5\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"484\",\n      \"name\": \"test employee\",\n      \"mobile_no\": \"9373063941\",\n      \"designation\": null,\n      \"email\": \"emp_9a1158d1@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-17T06:13:01.561Z\",\n      \"updated_at\": \"2026-09-17T06:13:01.561Z\",\n      \"username\": \"emp_4e23f0b5\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"482\",\n      \"name\": \"Anmol Singh\",\n      \"mobile_no\": \"9876543210\",\n      \"designation\": null,\n      \"email\": \"emp_d11a6dc8@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T12:41:41.899Z\",\n      \"updated_at\": \"2026-09-16T12:41:41.899Z\",\n      \"username\": \"emp_b5462d52\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"481\",\n      \"name\": \"Anmol Singh\",\n      \"mobile_no\": \"9876543210\",\n      \"designation\": null,\n      \"email\": \"emp_d024e65e@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T12:41:26.250Z\",\n      \"updated_at\": \"2026-09-16T12:41:26.250Z\",\n      \"username\": \"emp_6adbb359\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"483\",\n      \"name\": \"Minima ut excepturi \",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_3dcdd239@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T12:40:59.963Z\",\n      \"updated_at\": \"2026-09-16T12:40:59.963Z\",\n      \"username\": \"emp_2a7a9f81\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"478\",\n      \"name\": \"Incididunt officiis \",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_df835c9b@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T11:21:03.409Z\",\n      \"updated_at\": \"2026-09-16T11:21:03.409Z\",\n      \"username\": \"emp_8dceacad\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"477\",\n      \"name\": \"Omnis nesciunt nesc\",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_3ab45e59@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T11:17:17.083Z\",\n      \"updated_at\": \"2026-09-16T11:17:17.083Z\",\n      \"username\": \"emp_8db03e88\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"476\",\n      \"name\": \"Qui dolor maiores qu\",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_388698ce@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T11:09:50.649Z\",\n      \"updated_at\": \"2026-09-16T11:09:50.649Z\",\n      \"username\": \"emp_8ce8ee3c\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"475\",\n      \"name\": \"Ut incididunt volupt\",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_207aa733@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T06:58:19.522Z\",\n      \"updated_at\": \"2026-09-16T06:58:19.522Z\",\n      \"username\": \"emp_b34549a7\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"474\",\n      \"name\": \"Ipsam exercitation o\",\n      \"mobile_no\": null,\n      \"designation\": null,\n      \"email\": \"emp_7f059674@temp.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": \"approved\",\n      \"subscription_details\": {},\n      \"role\": \"contractor\",\n      \"created_at\": \"2026-09-16T06:58:19.484Z\",\n      \"updated_at\": \"2026-09-16T06:58:19.484Z\",\n      \"username\": \"emp_80322bb3\",\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"454\",\n      \"name\": \"anmol\",\n      \"mobile_no\": \"9373063942\",\n      \"designation\": \"Developer\",\n      \"email\": \"anmol.1787131507183-0-f15f@stallionemployee.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": null,\n      \"subscription_details\": {},\n      \"role\": \"user\",\n      \"created_at\": \"2026-08-19T09:25:07.313Z\",\n      \"updated_at\": \"2026-09-09T08:09:50.563Z\",\n      \"username\": null,\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"322\",\n      \"name\": \"Ali Khan\",\n      \"mobile_no\": \"9373063941\",\n      \"designation\": \"Manager\",\n      \"email\": \"ali.khan.1784610033415-2-ggpa@stallionemployee.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": null,\n      \"subscription_details\": {},\n      \"role\": \"user\",\n      \"created_at\": \"2026-07-21T05:00:34.050Z\",\n      \"updated_at\": \"2026-08-24T07:06:11.233Z\",\n      \"username\": null,\n      \"password\": null,\n      \"token_version\": 1,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    },\n    {\n      \"id\": \"291\",\n      \"name\": \"Krushang\",\n      \"mobile_no\": \"8291598930\",\n      \"designation\": \"Developer\",\n      \"email\": \"krushang.1784198296525-0-i8uq@stallionemployee.com\",\n      \"company_name\": null,\n      \"company_address\": null,\n      \"company_size\": null,\n      \"completed_project_count\": 0,\n      \"ongoing_projects\": 0,\n      \"features_interested_in\": [],\n      \"portal_access\": true,\n      \"two_fac_auth\": false,\n      \"developer_request_status\": null,\n      \"subscription_details\": {},\n      \"role\": \"user\",\n      \"created_at\": \"2026-07-16T10:38:16.659Z\",\n      \"updated_at\": \"2026-09-09T08:31:18.612Z\",\n      \"username\": null,\n      \"password\": null,\n      \"token_version\": 14,\n      \"parent_developer_id\": \"287\",\n      \"profile_image_key\": null,\n      \"profile_image_url\": null,\n      \"signature_url\": null,\n      \"access_request\": null,\n      \"is_workspace_owner\": false\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "11 List of User for a particular Project",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{projectToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/users/project/:projectID",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "users",
+            "project",
+            ":projectID"
+          ],
+          "variable": [
+            {
+              "key": "projectID",
+              "value": "194"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "11 List of User for a particular Project",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users/project/:projectID",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "project",
+                ":projectID"
+              ],
+              "variable": [
+                {
+                  "key": "projectID",
+                  "value": "194"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "server",
+              "value": "nginx/1.24.0 (Ubuntu)"
+            },
+            {
+              "key": "date",
+              "value": "Thu, 17 Sep 2026 07:55:55 GMT"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "198"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "vary",
+              "value": "Origin"
+            },
+            {
+              "key": "access-control-allow-credentials",
+              "value": "true"
+            },
+            {
+              "key": "content-security-policy",
+              "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+            },
+            {
+              "key": "cross-origin-opener-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "cross-origin-resource-policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "origin-agent-cluster",
+              "value": "?1"
+            },
+            {
+              "key": "referrer-policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "strict-transport-security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "key": "x-dns-prefetch-control",
+              "value": "off"
+            },
+            {
+              "key": "x-download-options",
+              "value": "noopen"
+            },
+            {
+              "key": "x-frame-options",
+              "value": "SAMEORIGIN"
+            },
+            {
+              "key": "x-permitted-cross-domain-policies",
+              "value": "none"
+            },
+            {
+              "key": "x-xss-protection",
+              "value": "0"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"c6-z14tn5wLkK2/Hgzql5o4u+AIF+U\""
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Project users fetched successfully.\",\n  \"data\": [\n    {\n      \"id\": \"322\",\n      \"name\": \"Ali Khan\"\n    },\n    {\n      \"id\": \"288\",\n      \"name\": \"Karn Barnwal\"\n    },\n    {\n      \"id\": \"454\",\n      \"name\": \"anmol\"\n    },\n    {\n      \"id\": \"291\",\n      \"name\": \"Krushang\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "12 Logout of all devices",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/developers/logout-all-devices",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "developers",
+            "logout-all-devices"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
