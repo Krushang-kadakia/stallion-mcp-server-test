@@ -1,8 +1,5 @@
 import logging
-import io
 import pytest
-import respx
-from httpx import Response
 from app.utils.logging import SecretMaskingFormatter
 from app.auth.manager import AuthManager
 from app.auth.store import InMemorySessionStore
@@ -21,34 +18,33 @@ def test_jwt_log_masking():
 
 
 @pytest.mark.asyncio
-@respx.mock
-async def test_token_sanitization_in_verify_otp():
-    client = BackendClient(base_url="https://api.dev.batman.co.in")
-    store = InMemorySessionStore()
-    manager = AuthManager(store=store, client=client)
+async def test_jwt_auth_middleware():
+    from app.main import JWTAuthMiddleware
+    from app.auth.manager import default_auth_manager
+
+    async def fake_app(scope, receive, send):
+        await send({"type": "http.response.start", "status": 200})
+        await send({"type": "http.response.body", "body": b"OK"})
+
+    mw = JWTAuthMiddleware(fake_app)
+    received = []
+
+    async def dummy_send(msg):
+        received.append(msg)
 
     raw_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDM5In0.secret"
-    respx.post("https://api.dev.batman.co.in/auth/verify-otp").mock(
-        return_value=Response(
-            200,
-            json={
-                "success": True,
-                "message": "Login successfull",
-                "data": {"token": raw_jwt, "user": {"id": "439"}}
-            }
-        )
-    )
+    scope = {
+        "type": "http",
+        "headers": [
+            (b"host", b"localhost:8000"),
+            (b"authorization", f"Bearer {raw_jwt}".encode("latin1")),
+            (b"x-session-id", b"sec_sess_99")
+        ]
+    }
+    await mw(scope, None, dummy_send)
 
-    res = await manager.verify_otp("sec_sess", "8291598930", "1234")
-    # Verify raw JWT is NOT present in returned data payload
-    assert raw_jwt not in str(res)
-    assert res["data"]["token"] == "[AUTHENTICATED_TOKEN_1]"
-
-    # Verify session store DOES contain the actual token for backend API use
-    session = await store.get_session("sec_sess")
-    assert session.auth_token == raw_jwt
-
-    await client.close()
+    token = await default_auth_manager.get_jwt_token("sec_sess_99")
+    assert token == raw_jwt
 
 
 @pytest.mark.asyncio
@@ -79,4 +75,5 @@ async def test_absolute_sse_endpoint_middleware():
     assert len(body_chunks) == 2
     assert "event: endpoint" in body_chunks[0]
     assert "data: https://stallion-mcp-server-test.onrender.com/messages/?session_id=test_123" in body_chunks[1]
+
 

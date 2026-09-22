@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,6 +8,7 @@ class Settings(BaseSettings):
     port: int = 8000
     log_level: str = "INFO"
     http_timeout: float = 30.0
+    jwt_token: Optional[str] = None
 
     model_config = SettingsConfigDict(
         env_file=".env",

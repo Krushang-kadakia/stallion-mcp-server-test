@@ -1,10 +1,11 @@
+README.md
 pyproject.toml
+app/main.py
 app/auth/manager.py
 app/auth/session.py
 app/auth/store.py
 app/client/backend_client.py
 app/config/settings.py
-app/tools/auth_tools.py
 app/tools/permission_tools.py
 app/tools/user_project_tools.py
 app/utils/errors.py
@@ -14,3 +15,7 @@ stallion_mcp_server.egg-info/SOURCES.txt
 stallion_mcp_server.egg-info/dependency_links.txt
 stallion_mcp_server.egg-info/requires.txt
 stallion_mcp_server.egg-info/top_level.txt
+tests/test_auth.py
+tests/test_backend_client.py
+tests/test_security.py
+tests/test_tools.py

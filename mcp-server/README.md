@@ -44,41 +44,30 @@ A remote, provider-independent **Model Context Protocol (MCP) Server** built in 
 
 ## Authentication & Token Architecture
 
-The Stallion application uses phone-number user accounts with a two-tier JWT token system:
+The Stallion MCP Server receives a **single JWT token** from external applications (such as frontend web apps, mobile apps, or LLM host orchestrators).
 
-1. **Token 1 (`authToken` / User Auth Token)**:
-   - Acquired via `verify_otp(mobile_number, code)`.
-   - Scope: User global profile (`/auth/me`), user project list (`/projects/mobile`), notifications (`/notifications`).
-
-2. **Token 2 (`projectToken` / Project Token)**:
-   - Acquired via `switch_project(project_id)` using Token 1.
-   - Scope: Project details (`/projects/:id`), project towers (`/towers`), assignable modules (`/modules/assignable`), developer users (`/developers/:id/users`), project users (`/users/project/:id`), project permissions (`/permissions/projects/:id`), and document viewing.
-
-### Session Storage & In-Memory Privacy
-
-- **Per-User Session Isolation**: Sessions are tracked via a unique `session_id`.
-- **Zero Disk/DB Persistence**: JWTs are kept in-memory only and are never written to disk or database.
-- **Pluggable Abstraction**: Implemented via `BaseSessionStore` & `InMemorySessionStore`. In multi-instance production environments, this can be swapped for an encrypted Redis-backed store without breaking tool logic.
+- **Token Sources**:
+  1. `Authorization: Bearer <jwt_token>` HTTP header
+  2. `X-JWT-Token` HTTP header
+  3. `jwt_token` tool argument
+  4. `STALLION_JWT_TOKEN` environment variable
+- **Zero Disk/DB Persistence**: JWTs are kept in-memory only for active sessions.
 
 ---
 
 ## MCP Tools Reference Table
 
-| Tool Name | Backend Endpoint | Method | Required JWT | Read/Write | Description |
-|---|---|---|---|---|---|
-| `send_otp` | `/auth/send-otp` | POST | None | Auth | Request login OTP SMS. |
-| `verify_otp` | `/auth/verify-otp` | POST | None | Auth | Verify OTP code & obtain Token 1. |
-| `switch_project` | `/auth/mobile/switch-by-project` | POST | Token 1 | Auth | Switch active project & obtain Token 2. |
-| `get_user_profile` | `/auth/me` | GET | Token 1 | Read | Retrieve user profile & metrics. |
-| `get_user_projects` | `/projects/mobile` | GET | Token 1 | Read | List all projects accessible to user. |
-| `get_project_details` | `/projects/:projectId` | GET | Token 2 | Read | Retrieve detailed project specifications. |
-| `get_project_towers` | `/towers?project_id=:id` | GET | Token 2 | Read | Retrieve list of towers for a project. |
-| `get_notifications` | `/notifications` | GET | Token 1 | Read | Retrieve paginated notifications. |
-| `get_assigned_modules` | `/modules/assignable` | GET | Token 2 | Read | Retrieve assigned developer modules. |
-| `get_developer_users` | `/developers/:id/users` | GET | Token 2 | Read | Retrieve employee list for developer. |
-| `get_project_users` | `/users/project/:id` | GET | Token 2 | Read | Retrieve user list for a project. |
-| `get_project_permissions` | `/permissions/projects/:id` | GET | Token 2 | Read | Retrieve permissions & LOD documents. |
-| `view_permission_document` | `/permissions/.../view` | GET | Token 2 | Read | Retrieve document metadata & view URL. |
+| Tool Name | Backend Endpoint | Method | Read/Write | Description |
+|---|---|---|---|---|
+| `get_user_profile` | `/auth/me` | GET | Read | Retrieve user profile & metrics. |
+| `get_project_details` | `/projects/:projectId` | GET | Read | Retrieve detailed project specifications. |
+| `get_project_towers` | `/towers?project_id=:id` | GET | Read | Retrieve list of towers for a project. |
+| `get_assigned_modules` | `/modules/assignable` | GET | Read | Retrieve assigned developer modules. |
+| `get_developer_users` | `/developers/:id/users` | GET | Read | Retrieve employee list for developer. |
+| `get_project_users` | `/users/project/:id` | GET | Read | Retrieve user list for a project. |
+| `get_project_permissions` | `/permissions/projects/:id` | GET | Read | Retrieve permissions & LOD documents. |
+| `view_permission_document` | `/permissions/.../view` | GET | Read | Retrieve document metadata & view URL. |
+
 
 > **Note**: Business-data mutating endpoints (`PUT /permissions/...`, `POST /permissions/.../upload`) are explicitly **excluded** for safety.
 

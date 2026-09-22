@@ -1,12 +1,10 @@
 from mcp.server.fastmcp import FastMCP
 from app.config.settings import settings
-from app.tools.auth_tools import send_otp_tool, verify_otp_tool, switch_project_tool
+from app.auth.manager import default_auth_manager as auth_manager
 from app.tools.user_project_tools import (
     get_user_profile_tool,
-    get_user_projects_tool,
     get_project_details_tool,
     get_project_towers_tool,
-    get_notifications_tool,
     get_assigned_modules_tool,
     get_developer_users_tool,
     get_project_users_tool,
@@ -37,33 +35,11 @@ else:
         pass
 
 
-
-# --- Register Auth Tools ---
-mcp.tool(
-    name="send_otp",
-    description="Send a login OTP code to user's mobile number."
-)(send_otp_tool)
-
-mcp.tool(
-    name="verify_otp",
-    description="Verify OTP code and authenticate user session."
-)(verify_otp_tool)
-
-mcp.tool(
-    name="switch_project",
-    description="Switch active project context and acquire project authorization."
-)(switch_project_tool)
-
-# --- Register User & Core Project Tools ---
+# --- Register 8 Authorized Tools ---
 mcp.tool(
     name="get_user_profile",
     description="Retrieve profile details of the authenticated user."
 )(get_user_profile_tool)
-
-mcp.tool(
-    name="get_user_projects",
-    description="Retrieve list of all accessible projects for the user."
-)(get_user_projects_tool)
 
 mcp.tool(
     name="get_project_details",
@@ -74,11 +50,6 @@ mcp.tool(
     name="get_project_towers",
     description="Retrieve list of towers for a project."
 )(get_project_towers_tool)
-
-mcp.tool(
-    name="get_notifications",
-    description="Retrieve paginated notifications for the user."
-)(get_notifications_tool)
 
 mcp.tool(
     name="get_assigned_modules",
@@ -95,7 +66,6 @@ mcp.tool(
     description="Retrieve list of users assigned to a project."
 )(get_project_users_tool)
 
-# --- Register Permission Module Tools ---
 mcp.tool(
     name="get_project_permissions",
     description="Retrieve permissions, categories, attachments, and LOD documents for a project."
@@ -110,6 +80,34 @@ mcp.tool(
 import re
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn
+
+
+class JWTAuthMiddleware:
+    """
+    ASGI middleware extracting Bearer JWT token from HTTP Authorization or X-JWT-Token header
+    and populating the session store for incoming tool requests.
+    """
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            headers = {}
+            for k, v in scope.get("headers", []):
+                headers[k.lower().decode("latin1")] = v.decode("latin1")
+
+            auth_header = headers.get("authorization", "") or headers.get("x-jwt-token", "")
+            token = None
+            if auth_header.lower().startswith("bearer "):
+                token = auth_header[7:].strip()
+            elif auth_header:
+                token = auth_header.strip()
+
+            if token:
+                session_id = headers.get("x-session-id", "default_session")
+                await auth_manager.set_jwt_token(session_id, token)
+
+        await self.app(scope, receive, send)
 
 
 class AbsoluteSSEEndpointMiddleware:
@@ -151,7 +149,7 @@ class AbsoluteSSEEndpointMiddleware:
         await self.app(scope, receive, send_wrapper)
 
 
-# Create Starlette ASGI application with CORS and Absolute SSE Endpoint Middleware
+# Create Starlette ASGI application with CORS, JWT Auth, and Absolute SSE Endpoint Middleware
 app = mcp.sse_app()
 app.add_middleware(
     CORSMiddleware,
@@ -160,11 +158,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(JWTAuthMiddleware)
 app.add_middleware(AbsoluteSSEEndpointMiddleware)
 
 if __name__ == "__main__":
-    logger.info(f"Starting Stallion MCP Server on {settings.host}:{settings.port} (SSE Transport with CORS)")
+    logger.info(f"Starting Stallion MCP Server on {settings.host}:{settings.port} (SSE Transport with CORS & Single JWT Auth)")
     uvicorn.run(app, host=settings.host, port=settings.port, proxy_headers=True, forwarded_allow_ips="*")
+
 
 
 
