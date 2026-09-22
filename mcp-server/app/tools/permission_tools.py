@@ -20,26 +20,36 @@ def _normalize_view_urls(data: Any, base_url: str) -> Any:
     return data
 
 
-async def get_project_permissions_tool(project_id: str, session_id: str = "default_session", jwt_token: Optional[str] = None) -> Dict[str, Any]:
+async def get_project_permissions_tool(
+    project_id: str,
+    page: int = 0,
+    limit: int = 10,
+    session_id: str = "default_session",
+    jwt_token: Optional[str] = None
+) -> Dict[str, Any]:
     """
-    Retrieve all permissions, status flags, expiry dates, attachments, and LOD documents for a project.
+    Retrieve paginated permissions, status flags, expiry dates, attachments, and LOD documents for a project.
 
     Parameters:
     - project_id: The ID of the project to retrieve permissions for (string).
+    - page: Zero-based page index for pagination (default: 0).
+    - limit: Number of permissions per page (default: 10).
     - session_id: Client session identifier.
     - jwt_token: Optional JWT auth token (string). If omitted, session token or header token is used.
 
     Returns:
-    - Detailed permissions array containing permission ID, status (Issued, In Process, Applied, Payment Due, etc.),
-      expiry dates, assigned user, remarks, category attachments, and LOD documents with full view URLs.
+    - Detailed permissions array with pagination metadata (page, limit, total_permissions, total_pages),
+      status (Issued, In Process, Applied, Payment Due, etc.), expiry dates, and documents with view URLs.
     """
     token = await auth_manager.get_jwt_token(session_id, jwt_token=jwt_token)
     response_data = await backend_client.request(
         method="GET",
         path=f"/permissions/projects/{project_id}",
+        params={"page": page, "limit": limit},
         token=token
     )
     return _normalize_view_urls(response_data, backend_client.base_url)
+
 
 
 async def view_permission_document_tool(

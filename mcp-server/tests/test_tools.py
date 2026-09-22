@@ -70,11 +70,12 @@ async def test_tool_invocations():
     assert proj_users_res["success"] is True
 
     # 7. get_project_permissions
-    respx.get("https://api.dev.batman.co.in/permissions/projects/194").mock(
+    respx.get("https://api.dev.batman.co.in/permissions/projects/194?page=0&limit=10").mock(
         return_value=Response(200, json={"success": True, "data": {"total_permissions": 2, "permissions": [{"id": "1038", "name": "Last Approved Plan"}]}})
     )
-    perm_res = await permission_tools.get_project_permissions_tool("194", session_id="test_tool_session")
+    perm_res = await permission_tools.get_project_permissions_tool("194", page=0, limit=10, session_id="test_tool_session")
     assert perm_res["success"] is True
+
 
     # 8. view_permission_document (JSON with relative URL)
     respx.get("https://api.dev.batman.co.in/permissions/projects/194/1038/documents/946/view").mock(
